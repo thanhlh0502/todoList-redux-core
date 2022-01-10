@@ -1,31 +1,16 @@
+import { combineReducers } from "redux";
+import filterReducer from "../components/Filters/reducer";
+import todoListReducer from "../components/TodoList/reducer";
 
-const initState ={
-    fillter:{
-        search:"",
-        status:"all",
-        priorities:[]
-    },
-    todoList:[
-        {id: 1, name:"Learn Yoga", priority: "High", completed:false},
-        {id: 2, name:"Learn React", priority: "Medium", completed:true},
-        {id: 3, name:"Learn .Net Core", priority: "Low", completed:false}
-    ]
+// const rootReducer = (state ={}, action)=>{
+//     return {
+//         todoList: todoListReducer(state.todoList, action),
+//         filters: filterReducer(state.filters, action)
+//     };
+// };
 
-};
-
-const rootReducer = (state = initState, action)=>{
-    switch(action.type) {
-        case 'todoList/addTodo':
-            return {
-                ...state,
-                todoList: [
-                    ...state.todoList,
-                    action.payload
-                ]
-            };
-        default:
-            return state;
-
-    }
-};
+const rootReducer = combineReducers ({
+    todoList: todoListReducer,
+    filters: filterReducer
+});
 export default rootReducer;
